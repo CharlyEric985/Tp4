@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="/WEB-INF/templates/template_defaut.xhtml">
+
+            <ui:define name="top">
+                Liste des Comptes
+            </ui:define>
+
+            <ui:define name="content">
+                <h:body>
+                    <h:form>
+                        <p:dataTable value="#{listeComptes.allComptes}"
+                                     var="item"
+                                     paginator="true"
+                                     rows="10"
+                                     rowsPerPageTemplate="2,4,8,10"
+                                     widgetVar="compteTable"
+                                     emptyMessage="Aucun Compte trouvé"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     >
+                            <f:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Recherche dans tous les champs de recherche"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('compteTable').filter()"
+                                                 style="width:150px"/>
+                                </p:outputPanel>
+                            </f:facet>
+                            <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                                <f:facet name="header">
+                                    <h:outputText value="Id"/>
+                                </f:facet>
+                                 <h:link value="#{item.id}" outcome="AjoutEtRetrait?id=#{item.id}"/>
+                            </p:column>
+                            
+                            <p:column sortBy="#{item.nom}" filterBy="#{item.nom}">
+                                <f:facet name="header">
+                                    <h:outputText value="Nom"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nom}"/>
+                            </p:column>
+
+                            <p:column sortBy="#{item.solde}" filterBy="#{item.solde}">
+                                <f:facet name="header">
+                                    <h:outputText value="Solde"/>
+                                </f:facet>
+                                <h:outputText value="#{item.solde}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""/>
+                                </f:facet>
+                                <p:commandLink action="#{listeComptes.supprimerCompte(item)}">
+                                    <h:graphicImage name="images/delete.png" styleClass="icone" width="30" height="30"/>
+                                </p:commandLink>
+                            </p:column>
+                             <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""/>
+                                </f:facet>
+                                <h:link outcome="modifierCompte?id=#{item.id}">
+                                    <h:graphicImage name="images/editer.png" styleClass="icone" width="30" height="30"/>
+                                </h:link> 
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                    <h:messages/>
+                </h:body>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
