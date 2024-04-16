@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <body>
+
+        <ui:composition template="/WEB-INF/templates/template_defaut.xhtml">
+
+            <ui:define name="metadata">
+                <f:metadata>
+                    <f:viewParam name="id" value="#{ajoutEtRetrait.id}"
+                                 required="true"/>
+                    <f:viewAction action="#{ajoutEtRetrait.loadCompte}"/>
+                </f:metadata>
+            </ui:define>
+
+            <ui:define name="top">
+                Ajout et retrait
+            </ui:define>
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form rendered='#{ajoutEtRetrait.compteBancaire != null}'>
+                        <h1><h:outputText value="Dépôt/Retrait"/></h1>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Montant" for="montant" />
+                            <h:inputText id="montant" value="#{ajoutEtRetrait.montant}" title="Montant" />
+                            <h:outputLabel value="Action :" for="action" />
+                            <h:selectOneMenu value="#{ajoutEtRetrait.option}">
+                                <f:selectItem itemLabel="Sélectionnez une option..." itemValue="null" />
+                                <f:selectItem itemLabel="Ajouter" itemValue="ajouter" />
+                                <f:selectItem itemLabel="Retrait" itemValue="retrait" />
+                            </h:selectOneMenu>
+                            <h:commandButton id="update" value="Valider" action="#{ajoutEtRetrait.valider()}"/>
+                            <h:messages globalOnly="true" infoStyle="color: green;"
+                                        errorStyle="color: red;"/>
+                        </h:panelGrid>
+                    </h:form>
+                    <h:messages/>
+                    <h:outputText value="Aucun client avec l'id #{ajoutEtRetrait.id} !" 
+                                  rendered='#{ajoutEtRetrait.compteBancaire == null}' 
+                                  style="font-weight: bold; color: red;" />
+
+                    <h:button id="back" value="Revenir à la liste" outcome="listeComptes"/>
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
