@@ -29,17 +29,15 @@
                             <h:outputLabel value="Montant" for="montant" />
                             <h:inputText id="montant" value="#{ajoutEtRetrait.montant}" title="Montant" />
                             <h:outputLabel value="Action :" for="action" />
-                            <h:selectOneMenu value="#{ajoutEtRetrait.option}">
-                                <f:selectItem itemLabel="Sélectionnez une option..." itemValue="null" />
+                            <h:selectOneRadio value="#{ajoutEtRetrait.option}">
                                 <f:selectItem itemLabel="Ajouter" itemValue="ajouter" />
                                 <f:selectItem itemLabel="Retrait" itemValue="retrait" />
-                            </h:selectOneMenu>
+                            </h:selectOneRadio>
                             <h:commandButton id="update" value="Valider" action="#{ajoutEtRetrait.valider()}"/>
                             <h:messages globalOnly="true" infoStyle="color: green;"
                                         errorStyle="color: red;"/>
                         </h:panelGrid>
                     </h:form>
-                    <h:messages/>
                     <h:outputText value="Aucun client avec l'id #{ajoutEtRetrait.id} !" 
                                   rendered='#{ajoutEtRetrait.compteBancaire == null}' 
                                   style="font-weight: bold; color: red;" />

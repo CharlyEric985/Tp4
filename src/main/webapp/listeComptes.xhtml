@@ -37,9 +37,9 @@
                                 <f:facet name="header">
                                     <h:outputText value="Id"/>
                                 </f:facet>
-                                 <h:link value="#{item.id}" outcome="AjoutEtRetrait?id=#{item.id}"/>
+                                <h:link value="#{item.id}" outcome="AjoutEtRetrait?id=#{item.id}"/>
                             </p:column>
-                            
+
                             <p:column sortBy="#{item.nom}" filterBy="#{item.nom}">
                                 <f:facet name="header">
                                     <h:outputText value="Nom"/>
@@ -61,7 +61,7 @@
                                     <h:graphicImage name="images/delete.png" styleClass="icone" width="30" height="30"/>
                                 </p:commandLink>
                             </p:column>
-                             <p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value=""/>
                                 </f:facet>
@@ -69,6 +69,14 @@
                                     <h:graphicImage name="images/editer.png" styleClass="icone" width="30" height="30"/>
                                 </h:link> 
                             </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText escape="false" value="Historique&lt;br/>opérations"/>
+                                </f:facet>
+                                <h:link value="Détails" outcome="operations?id=#{item.id}"/>
+                            </p:column>
+
                         </p:dataTable>
                     </h:form>
                     <h:messages/>

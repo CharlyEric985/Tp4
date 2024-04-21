@@ -19,13 +19,13 @@
                         <h:inputText id="nom" size="3" value="#{ajoutCompte.nom}"
                                      required="true"
                                      converterMessage="Le nom est obligatoire"/>
-                    </h:panelGrid>
-                    <br></br>
-                    <h:panelGrid columns="3">
+                        <h:message for="nom"/> 
+                        
                         Montant : 
                         <h:inputText id="solde" size="3" value="#{ajoutCompte.solde}"
                                      converterMessage="Montant est un nombre entier"
                                      validatorMessage="Solde incorrect"/>
+                        <h:message for="solde"/> 
                     </h:panelGrid>
                     <h:commandButton value="Ajouter" action="#{ajoutCompte.ajouter()}"/>
                 </h:form>
