@@ -7,9 +7,9 @@ package mg.flavien.tpbanqueEric.jsf;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import mg.flavien.tpbanqueEric.entities.CompteBancaire;
-import mg.flavien.tpbanqueEric.jsf.util.Util;
-import mg.flavien.tpbanqueEric.service.GestionnaireCompte;
+import mg.flavien.tpbanqueflavien.entities.CompteBancaire;
+import mg.flavien.tpbanqueflavien.jsf.util.Util;
+import mg.flavien.tpbanqueflavien.service.GestionnaireCompte;
 
 /**
  *

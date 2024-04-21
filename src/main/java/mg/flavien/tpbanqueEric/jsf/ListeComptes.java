@@ -9,9 +9,9 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import mg.flavien.tpbanqueEric.entities.CompteBancaire;
-import mg.flavien.tpbanqueEric.jsf.util.Util;
-import mg.flavien.tpbanqueEric.service.GestionnaireCompte;
+import mg.flavien.tpbanqueflavien.entities.CompteBancaire;
+import mg.flavien.tpbanqueflavien.jsf.util.Util;
+import mg.flavien.tpbanqueflavien.service.GestionnaireCompte;
 
 /**
  *

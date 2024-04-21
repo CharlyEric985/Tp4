@@ -11,7 +11,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import java.util.List;
-import mg.flavien.tpbanqueEric.entities.CompteBancaire;
+import mg.flavien.tpbanqueflavien.entities.CompteBancaire;
+import mg.flavien.tpbanqueflavien.entities.OperationBancaire;
 
 /**
  *
@@ -39,12 +40,19 @@ public class GestionnaireCompte {
 
     @Transactional
     public void creerCompte(CompteBancaire c) {
+        c.getOperations().add(new OperationBancaire("Création du compte", c.getSolde()));
         em.persist(c);
     }
 
     public List<CompteBancaire> getAllComptes() {
         Query query = em.createQuery("select c from CompteBancaire as c");
         return query.getResultList();
+    }
+
+    public CompteBancaire findByIdWithOperations(Long id) {
+        return em.createQuery("SELECT cb FROM CompteBancaire cb JOIN FETCH cb.operations WHERE cb.id = :id", CompteBancaire.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 
     public int compterCompter() {
@@ -58,10 +66,8 @@ public class GestionnaireCompte {
     @Transactional
     public void transferer(CompteBancaire source, CompteBancaire destination,
             int montant) {
-        source.retirer(montant);
-        destination.deposer(montant);
-        update(source);
-        update(destination);
+        retirerArgent(source, montant);
+        deposerArgent(destination, montant);
     }
 
     @Transactional
@@ -71,12 +77,14 @@ public class GestionnaireCompte {
 
     @Transactional
     public void retirerArgent(CompteBancaire source, int montant) {
+        source.getOperations().add(new OperationBancaire("Débit", (-1 * montant)));
         source.retirer(montant);
         update(source);
     }
 
     @Transactional
     public void deposerArgent(CompteBancaire source, int montant) {
+        source.getOperations().add(new OperationBancaire("Crédit", montant));
         source.deposer(montant);
         update(source);
     }
@@ -85,10 +93,11 @@ public class GestionnaireCompte {
     public void supprimerCompte(CompteBancaire compte) {
         em.remove(em.merge(compte));
     }
-    
+
     @Transactional
-   public void modifierNom(CompteBancaire compte,String nom){
-       compte.setNom(nom);
-       update(compte);
-   }
+    public void modifierNom(CompteBancaire compte, String nom) {
+        compte.getOperations().add(new OperationBancaire("Modification compte", compte.getSolde()));
+        compte.setNom(nom);
+        update(compte);
+    }
 }

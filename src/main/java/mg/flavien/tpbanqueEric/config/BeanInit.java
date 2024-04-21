@@ -9,8 +9,8 @@ import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
-import mg.flavien.tpbanqueEric.entities.CompteBancaire;
-import mg.flavien.tpbanqueEric.service.GestionnaireCompte;
+import mg.flavien.tpbanqueflavien.entities.CompteBancaire;
+import mg.flavien.tpbanqueflavien.service.GestionnaireCompte;
 
 /**
  *

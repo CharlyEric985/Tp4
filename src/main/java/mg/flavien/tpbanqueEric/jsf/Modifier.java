@@ -8,9 +8,9 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
-import mg.flavien.tpbanqueEric.entities.CompteBancaire;
-import mg.flavien.tpbanqueEric.jsf.util.Util;
-import mg.flavien.tpbanqueEric.service.GestionnaireCompte;
+import mg.flavien.tpbanqueflavien.entities.CompteBancaire;
+import mg.flavien.tpbanqueflavien.jsf.util.Util;
+import mg.flavien.tpbanqueflavien.service.GestionnaireCompte;
 
 /**
  *
@@ -59,6 +59,7 @@ public class Modifier implements Serializable {
 
     public void loadCompte() {
         this.compte = bean.findById(id);
+        this.nom = this.compte.getNom();
     }
 
     public CompteBancaire getCompteBancaire() {
